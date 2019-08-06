@@ -1,0 +1,20 @@
+service: MohikanzSlackChannnelList
+provider:
+  name: aws
+  runtime: python3.6
+  stage: prod
+  region: ap-northeast-1
+  environment:
+    SLACK_TOKEN: 'xoxp-xxx'
+    GIST_ID: 'yyy'
+    GITHUB_TOKEN: 'zzz'
+plugins:
+  - serverless-python-requirements
+functions:
+  fnc:
+    handler: main.handler
+    events:
+      - schedule: cron(0 20 * * ? *) # UTC 20:00 ( JST 05:00 )
+custom:
+  pythonRequirements:
+    pythonBin: python
